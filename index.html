@@ -61,18 +61,31 @@
       position: absolute;
     }
 
+    /* totally hide youtube iframe (audio only) */
+    .yt-music {
+      width: 0;
+      height: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
     @keyframes popIn {
       from { transform: scale(0); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
+
 <body onclick="startMusic()">
 
-  <!-- 🎵 BACKGROUND MUSIC -->
-  <audio id="bgMusic" loop>
-    <source src="mr-brightside.mp3" type="audio/mpeg">
-  </audio>
+  <!-- 🎵 YOUTUBE BACKGROUND MUSIC (Mr. Brightside @ 20s) -->
+  <iframe
+    id="ytPlayer"
+    class="yt-music"
+    src=""
+    frameborder="0"
+    allow="autoplay">
+  </iframe>
 
   <div class="box">
     <img src="us.png" class="photo" alt="Us 💕">
@@ -89,7 +102,10 @@
 
     function startMusic() {
       if (!musicStarted) {
-        document.getElementById("bgMusic").play();
+        const yt = document.getElementById("ytPlayer");
+        yt.src =
+          "https://www.youtube.com/embed/MppQlSeDk9g" +
+          "?start=20&autoplay=1&loop=1&playlist=MppQlSeDk9g";
         musicStarted = true;
       }
     }
@@ -105,7 +121,6 @@
 
       noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
-      // YES button keeps growing
       yesSize += 0.2;
       yesBtn.style.transform = `scale(${yesSize})`;
     }

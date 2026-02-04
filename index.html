@@ -61,7 +61,6 @@
       position: absolute;
     }
 
-    /* totally hide youtube iframe (audio only) */
     .yt-music {
       width: 0;
       height: 0;
@@ -76,13 +75,13 @@
   </style>
 </head>
 
-<body onclick="startMusic()">
+<body onclick="unmuteMusic()">
 
-  <!-- 🎵 YOUTUBE BACKGROUND MUSIC (Mr. Brightside @ 20s) -->
+  <!-- 🎵 YouTube autoplay MUTED -->
   <iframe
     id="ytPlayer"
     class="yt-music"
-    src=""
+    src="https://www.youtube.com/embed/MppQlSeDk9g?start=20&autoplay=1&loop=1&playlist=MppQlSeDk9g&mute=1"
     frameborder="0"
     allow="autoplay">
   </iframe>
@@ -97,21 +96,20 @@
   </div>
 
   <script>
-    let yesSize = 1;
-    let musicStarted = false;
+    let unmuted = false;
 
-    function startMusic() {
-      if (!musicStarted) {
+    function unmuteMusic() {
+      if (!unmuted) {
         const yt = document.getElementById("ytPlayer");
         yt.src =
           "https://www.youtube.com/embed/MppQlSeDk9g" +
           "?start=20&autoplay=1&loop=1&playlist=MppQlSeDk9g";
-        musicStarted = true;
+        unmuted = true;
       }
     }
 
     function runAway() {
-      startMusic();
+      unmuteMusic();
 
       const noBtn = document.getElementById("no");
       const yesBtn = document.getElementById("yes");
@@ -121,8 +119,7 @@
 
       noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
-      yesSize += 0.2;
-      yesBtn.style.transform = `scale(${yesSize})`;
+      yesBtn.style.transform = `scale(${1.2})`;
     }
 
     function yesClick() {
@@ -137,11 +134,10 @@
           text-align:center;
           padding:20px;
         ">
-          <h1 style="color:#ff4d6d; font-size:28px; line-height:1.4;">
+          <h1 style="color:#ff4d6d;">
             Thanks Babe, sabi ko na G ka eh. 💕<br><br>
-            See you on Feb 13 till... ?? 😏<br><br>
             I love you!! ❤️<br><br>
-            <span style="font-size:20px;">– Bry</span>
+            – Bry
           </h1>
         </div>
       `;
